@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const HOST = process.env.NEXT_PUBLIC_HOST || "http://localhost:8080";
+const HOST = process.env.NEXT_PUBLIC_HOST;
 
 export enum Type {
     MP3 = "mp3",

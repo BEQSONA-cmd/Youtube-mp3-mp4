@@ -1,10 +1,18 @@
 from flask import Flask, request
 from flask_cors import CORS
-from download import download_youtube_as_mp3, download_youtube_as_mp4
 from send import send_media
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+HOST = os.getenv("HOST", "http://localhost:3000")
 
 app = Flask(__name__)
-CORS(app, expose_headers=["Content-Disposition", "Content-Length", "ETag"])
+CORS(
+    app,
+    expose_headers=["Content-Disposition", "Content-Length", "ETag"]
+    )
 
 def shorten_url(url):
     if "&" in url:
@@ -19,7 +27,7 @@ def download_mp3():
     url = shorten_url(reqUrl)
     if not url:
         return "Invalid URL", 400
-    return send_media(url, download_youtube_as_mp3, "mp3")
+    return send_media(url, "mp3")
 
 @app.get("/api/downloadMP4")
 def download_mp4():
@@ -27,7 +35,7 @@ def download_mp4():
     url = shorten_url(reqUrl)
     if not url:
         return "Invalid URL", 400
-    return send_media(url, download_youtube_as_mp4, "mp4")
+    return send_media(url, "mp4")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)

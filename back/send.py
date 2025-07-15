@@ -1,9 +1,11 @@
 import tempfile, shutil, os
 from flask import send_file, after_this_request, make_response
+from download import download_youtube_as_mp3, download_youtube_as_mp4
 
-def send_media(url, download_func, media_type):
+def send_media(url, media_type):
     if not url:
         return make_response("Invalid URL", 400)
+    download_func = download_youtube_as_mp3 if media_type == "mp3" else download_youtube_as_mp4
 
     tmpfiles_dir = os.path.join(os.path.dirname(__file__), "tmp")
     os.makedirs(tmpfiles_dir, exist_ok=True)
