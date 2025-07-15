@@ -12,10 +12,10 @@ export async function Download(link: string, type: Type) {
     let endpoint = "";
     let filename = "";
     if (type === Type.MP3) {
-        endpoint = `${HOST}/api/downloadMP3`;
+        endpoint = `${HOST}/flask/api/downloadMP3`;
         filename = "audio.mp3";
     } else if (type === Type.MP4) {
-        endpoint = `${HOST}/api/downloadMP4`;
+        endpoint = `${HOST}/flask/api/downloadMP4`;
         filename = "video.mp4";
     } else {
         throw new Error("Unsupported type");
