@@ -57,9 +57,12 @@ def download_youtube_as_mp3(url, output_path="music/"):
             ],
             'prefer_ffmpeg': True,
             'quiet': False,
-            'no_warnings': True,
-            'ratelimit': 1000000,
-            'sleep_interval': 5,
+            'extract_flat': True,
+            'force_ipv4': True,
+            'no_check_certificate': True,
+            'source_address': '0.0.0.0',
+            'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            'throttledratelimit': 500000,  # Limit download speed
         }
 
         filename = run_with_timeout(download_worker, TIMEOUT, url, ydl_opts, output_path)
