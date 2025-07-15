@@ -2,7 +2,7 @@ import yt_dlp
 import os
 from multiprocessing import Process, Queue
 
-TIMEOUT = 30 
+TIMEOUT = 60 
 
 def download_worker(url, ydl_opts, output_path, queue):
     try:
@@ -60,7 +60,6 @@ def download_youtube_as_mp3(url, output_path="music/"):
             'no_warnings': True,
             'ratelimit': 1000000,
             'sleep_interval': 5,
-            'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         }
 
         filename = run_with_timeout(download_worker, TIMEOUT, url, ydl_opts, output_path)
@@ -79,6 +78,9 @@ def download_youtube_as_mp4(url, output_path="videos/"):
             'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',
             'outtmpl': os.path.join(output_path, '%(title)s.%(ext)s'),
             'quiet': False,
+            'no_warnings': True,
+            'ratelimit': 1000000,
+            'sleep_interval': 5,
         }
         filename = run_with_timeout(download_worker, TIMEOUT, url, ydl_opts, output_path)
         return filename
