@@ -2,7 +2,7 @@ import yt_dlp
 import os
 from multiprocessing import Process, Queue
 
-TIMEOUT = 60 
+TIMEOUT = 360 
 
 def download_worker(url, ydl_opts, output_path, queue):
     try:
