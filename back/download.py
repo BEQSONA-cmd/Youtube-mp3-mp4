@@ -60,7 +60,9 @@ def download_youtube_as_mp3(url, output_path="music/"):
             'no_warnings': True,
             'ratelimit': 1000000,
             'sleep_interval': 5,
+            'cookiefile': 'cookies.txt',
         }
+
 
         filename = run_with_timeout(download_worker, TIMEOUT, url, ydl_opts, output_path)
         return filename
