@@ -23,7 +23,7 @@ def shorten_url(url):
         return None
     return url
 
-@app.get("/flask/api/downloadMP3")
+@app.get("/api/downloadMP3")
 def download_mp3():
     reqUrl = request.args.get("link")
     url = shorten_url(reqUrl)
@@ -31,7 +31,7 @@ def download_mp3():
         return "Invalid URL", 400
     return send_media(url, "mp3")
 
-@app.get("/flask/api/downloadMP4")
+@app.get("/api/downloadMP4")
 def download_mp4():
     reqUrl = request.args.get("link")
     url = shorten_url(reqUrl)
